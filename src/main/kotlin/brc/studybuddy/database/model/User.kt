@@ -25,7 +25,7 @@ data class User(
 
     @Column("groups")
     @JsonProperty("groups")
-    val groups: Long,
+    val groups: Long
 ) {
     enum class LoginType {
         PASSWORD,
