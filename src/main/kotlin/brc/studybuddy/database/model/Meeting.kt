@@ -38,11 +38,11 @@ data class Meeting(
 ) {
     @Transient
     @JsonProperty("group")
-    lateinit var group: Group
+    var group: Group? = null
 
     @Transient
     @JsonProperty("host")
-    lateinit var host: User
+    var host: User? = null
 
     enum class MeetingType {
         PHYSICAL,
