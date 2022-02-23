@@ -21,5 +21,5 @@ data class Group(
 
     @Column("description")
     @JsonProperty("description")
-    val description: String?,
+    val description: String?
 )

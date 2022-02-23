@@ -3,7 +3,7 @@ package brc.studybuddy.rabbitmq
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.nio.ByteBuffer
 
-internal val objectMapper = ObjectMapper()
+private val objectMapper = ObjectMapper()
 
 internal fun <T> serializeData(value: T): ByteArray = objectMapper.writeValueAsString(value).toByteArray(Charsets.UTF_8)
 
