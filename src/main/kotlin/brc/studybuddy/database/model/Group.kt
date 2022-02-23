@@ -26,7 +26,7 @@ data class Group(
 ) {
     @Transient
     @JsonProperty("owner")
-    lateinit var owner: User
+    var owner: User? = null
 
     @Transient
     @JsonProperty("members")
