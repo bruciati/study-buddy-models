@@ -1,5 +1,6 @@
 package brc.studybuddy.database.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -20,13 +21,17 @@ data class User(
     val loginType: LoginType,
 
     @Column("login_value")
-    @JsonProperty("login_value")
+    @JsonIgnore
     val loginValue: String,
 
     @Column("groups")
-    @JsonProperty("groups")
-    val groups: Long
+    @JsonIgnore
+    val groupIds: Long
 ) {
+    @Transient
+    @JsonProperty("groups")
+    val groups: List<Group> = emptyList()
+
     enum class LoginType {
         PASSWORD,
         FACEBOOK
