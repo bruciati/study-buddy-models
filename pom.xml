@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>brc.studybuddy</groupId>
-    <artifactId>model</artifactId>
+    <artifactId>study-buddy-models</artifactId>
     <version>0.1.3</version>
     <packaging>jar</packaging>
 
@@ -34,27 +34,15 @@
             <artifactId>reactor-rabbitmq</artifactId>
         </dependency>
         <!-- END/RabbitMq -->
+
         <!-- R2DBC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
         </dependency>
         <!-- END/R2DBC -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <!-- Exclude the Tomcat dependency -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
+
+        <!-- Kotlin Addons -->
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-kotlin</artifactId>
@@ -67,10 +55,11 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-jdk8</artifactId>
         </dependency>
+        <!-- END/Kotlin Addons -->
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <sourceDirectory>${project.basedir}/src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>
