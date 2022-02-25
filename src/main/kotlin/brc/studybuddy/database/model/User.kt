@@ -30,7 +30,7 @@ data class User(
 ) {
     @Transient
     @JsonProperty("groups")
-    val groups: List<Group> = emptyList()
+    var groups: List<Group>? = null
 
     enum class LoginType {
         PASSWORD,
