@@ -1,6 +1,5 @@
 package brc.studybuddy.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -10,31 +9,31 @@ import org.springframework.data.relational.core.mapping.Table
 data class Meeting(
     @Id
     @JsonProperty("id")
-    val id: Long,
+    val id: Long? = null,
 
     @Column("group_id")
-    @JsonIgnore
-    val groupId: Long,
+    @JsonProperty("group_id")
+    val groupId: Long = 0,
 
     @Column("host_id")
-    @JsonIgnore
-    val hostId: Long,
+    @JsonProperty("host_id")
+    val hostId: Long = 0,
 
     @Column("name")
     @JsonProperty("name")
-    val name: String,
+    val name: String? = null,
 
     @Column("datetime")
     @JsonProperty("datetime")
-    val dateTime: Long,
+    val dateTime: Long = 0,
 
     @Column("type")
     @JsonProperty("type")
-    val type: Type,
+    val type: Type = Type.ONLINE,
 
     @Column("location")
     @JsonProperty("location")
-    val location: String
+    val location: String? = null
 ) {
     @Transient
     @JsonProperty("group")
