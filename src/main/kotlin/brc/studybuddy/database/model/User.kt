@@ -18,10 +18,10 @@ data class User(
 
     @Column("login_type")
     @JsonProperty("login_type")
-    val loginType: LoginType,
+    val loginType: Type,
 
     @Column("login_value")
-    @JsonIgnore
+    @JsonProperty("login_value")
     val loginValue: String,
 
     @Column("groups")
@@ -32,7 +32,7 @@ data class User(
     @JsonProperty("groups")
     var groups: List<Group>? = null
 
-    enum class LoginType {
+    enum class Type {
         PASSWORD,
         FACEBOOK
     }
