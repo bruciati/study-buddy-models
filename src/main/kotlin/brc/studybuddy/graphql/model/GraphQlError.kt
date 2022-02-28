@@ -2,7 +2,7 @@ package brc.studybuddy.graphql.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class GraphQlError (
+data class GraphQlError(
     @JsonProperty("message")
     override val message: String,
 
