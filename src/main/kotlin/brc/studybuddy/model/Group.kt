@@ -9,19 +9,19 @@ import org.springframework.data.relational.core.mapping.Table
 data class Group(
     @Id
     @JsonProperty("id")
-    val id: Long = 0,
+    val id: Long,
 
     @Column("owner_id")
     @JsonProperty("owner_id")
-    val ownerId: Long = 0,
+    val ownerId: Long,
 
     @Column("title")
     @JsonProperty("title")
-    val title: String? = null,
+    val title: String,
 
     @Column("description")
     @JsonProperty("description")
-    val description: String? = null
+    val description: String
 ) {
     @Transient
     @JsonProperty("owner")
