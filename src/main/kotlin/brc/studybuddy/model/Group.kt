@@ -1,4 +1,4 @@
-package brc.studybuddy.database.model
+package brc.studybuddy.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
