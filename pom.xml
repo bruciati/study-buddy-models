@@ -6,13 +6,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.0-M1</version>
+        <version>2.7.0-M2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>brc.studybuddy</groupId>
     <artifactId>study-buddy-models</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6</version>
     <packaging>jar</packaging>
 
     <name>StudyBuddy Models</name>
@@ -24,16 +24,19 @@
     </properties>
 
     <dependencies>
-        <!-- RabbitMq -->
+        <!-- Spring -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+            <exclusions>
+                <!-- Exclude the Tomcat dependency -->
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-            <groupId>io.projectreactor.rabbitmq</groupId>
-            <artifactId>reactor-rabbitmq</artifactId>
-        </dependency>
-        <!-- END/RabbitMq -->
+        <!-- END/Spring -->
 
         <!-- R2DBC -->
         <dependency>

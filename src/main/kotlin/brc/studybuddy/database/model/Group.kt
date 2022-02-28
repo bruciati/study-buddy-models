@@ -30,5 +30,5 @@ data class Group(
 
     @Transient
     @JsonProperty("members")
-    val members: List<User> = emptyList()
+    var members: List<User>? = null
 }

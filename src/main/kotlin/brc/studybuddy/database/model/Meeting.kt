@@ -30,7 +30,7 @@ data class Meeting(
 
     @Column("type")
     @JsonProperty("type")
-    val type: MeetingType,
+    val type: Type,
 
     @Column("location")
     @JsonProperty("location")
@@ -44,7 +44,7 @@ data class Meeting(
     @JsonProperty("host")
     var host: User? = null
 
-    enum class MeetingType {
+    enum class Type {
         PHYSICAL,
         ONLINE
     }
