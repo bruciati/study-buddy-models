@@ -15,10 +15,6 @@ data class Meeting(
     @JsonProperty("group_id")
     val groupId: Long,
 
-    @Column("host_id")
-    @JsonProperty("host_id")
-    val hostId: Long,
-
     @Column("name")
     @JsonProperty("name")
     val name: String,
@@ -42,6 +38,10 @@ data class Meeting(
     @Transient
     @JsonProperty("host")
     var host: User? = null
+
+    @Transient
+    @JsonProperty("attendees")
+    var attendees: List<User>? = null
 
     enum class Type {
         PHYSICAL,
