@@ -9,31 +9,31 @@ import org.springframework.data.relational.core.mapping.Table
 data class Meeting(
     @Id
     @JsonProperty("id")
-    val id: Long? = null,
+    val id: Long,
 
     @Column("group_id")
     @JsonProperty("group_id")
-    val groupId: Long = 0,
+    val groupId: Long,
 
     @Column("host_id")
     @JsonProperty("host_id")
-    val hostId: Long = 0,
+    val hostId: Long,
 
     @Column("name")
     @JsonProperty("name")
-    val name: String? = null,
+    val name: String,
 
     @Column("datetime")
     @JsonProperty("datetime")
-    val dateTime: Long = 0,
+    val dateTime: Long,
 
     @Column("type")
     @JsonProperty("type")
-    val type: Type = Type.ONLINE,
+    val type: Type,
 
     @Column("location")
     @JsonProperty("location")
-    val location: String? = null
+    val location: String
 ) {
     @Transient
     @JsonProperty("group")

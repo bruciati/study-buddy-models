@@ -9,23 +9,23 @@ import org.springframework.data.relational.core.mapping.Table
 data class User(
     @Id
     @JsonProperty("id")
-    val id: Long = 0,
+    val id: Long,
 
     @Column("email")
     @JsonProperty("email")
-    val email: String? = null,
+    val email: String,
 
     @Column("login_type")
     @JsonProperty("login_type")
-    val loginType: Type = Type.PASSWORD,
+    val loginType: Type,
 
     @Column("login_value")
     @JsonProperty("login_value")
-    val loginValue: String? = null,
+    val loginValue: String,
 
     @Column("groups")
     @JsonProperty("groups_owned")
-    val groupsOwned: Long = 0
+    val groupsOwned: Long
 ) {
     @Transient
     @JsonProperty("groups")
