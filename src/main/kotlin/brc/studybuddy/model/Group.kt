@@ -1,6 +1,5 @@
 package brc.studybuddy.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -10,19 +9,19 @@ import org.springframework.data.relational.core.mapping.Table
 data class Group(
     @Id
     @JsonProperty("id")
-    val id: Long,
+    val id: Long = 0,
 
     @Column("owner_id")
-    @JsonIgnore
-    val ownerId: Long,
+    @JsonProperty("owner_id")
+    val ownerId: Long = 0,
 
     @Column("title")
     @JsonProperty("title")
-    val title: String,
+    val title: String? = null,
 
     @Column("description")
     @JsonProperty("description")
-    val description: String?
+    val description: String? = null
 ) {
     @Transient
     @JsonProperty("owner")
