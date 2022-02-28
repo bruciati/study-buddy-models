@@ -24,8 +24,8 @@ data class User(
     val loginValue: String,
 
     @Column("groups")
-    @JsonProperty("groups_owned")
-    val groupsOwned: Long
+    @JsonProperty("groups_count")
+    val groupsCount: Long
 ) {
     @Transient
     @JsonProperty("groups")

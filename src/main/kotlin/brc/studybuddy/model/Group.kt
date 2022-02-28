@@ -11,10 +11,6 @@ data class Group(
     @JsonProperty("id")
     val id: Long,
 
-    @Column("owner_id")
-    @JsonProperty("owner_id")
-    val ownerId: Long,
-
     @Column("title")
     @JsonProperty("title")
     val title: String,
