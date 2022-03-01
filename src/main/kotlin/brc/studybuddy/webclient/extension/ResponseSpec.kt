@@ -28,7 +28,8 @@ fun <T> WebClient.ResponseSpec.graphQlToMono(classType: Class<T>): Mono<T> =
     this.graphQlToMap()
         .handle { map, sink ->
             try {
-                sink.next(objectMapper.convertValue(map.values.first(), classType))
+                val value = map.values.first()
+                sink.next(objectMapper.convertValue(value, classType))
             } catch (_: IllegalArgumentException) {
                 sink.error(
                     GraphQlError(
