@@ -13,7 +13,7 @@ data class Group(
 
     @Column("owner_id")
     @JsonProperty("owner_id")
-    val owner_id: Long,
+    val ownerId: Long,
 
     @Column("title")
     @JsonProperty("title")
