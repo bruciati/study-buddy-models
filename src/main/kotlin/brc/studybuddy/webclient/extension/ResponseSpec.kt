@@ -65,8 +65,6 @@ fun <T> WebClient.ResponseSpec.graphQlToFlux(classType: Class<T>): Flux<T> =
                         GraphQlError.Location(0, 0)
                     )
                 )
-            } catch (_: NoSuchElementException) {
-                sink.complete()
             }
         }
 
