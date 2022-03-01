@@ -18,7 +18,7 @@ fun WebClient.ResponseSpec.graphQlToMap(): Mono<Map<*, *>> =
         .handle { map, sink ->
             if (map.containsKey("errors")) {
                 val errors = map["errors"] as List<*>
-                sink.error(ObjectMapper().convertValue(errors.first(), GraphQlError::class.java))
+                sink.error(objectMapper.convertValue(errors.first(), GraphQlError::class.java))
             } else {
                 sink.next(map["data"] as Map<*, *>)
             }
