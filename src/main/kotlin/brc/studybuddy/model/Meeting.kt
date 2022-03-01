@@ -15,6 +15,10 @@ data class Meeting(
     @JsonProperty("group_id")
     val groupId: Long,
 
+    @Column("host_id")
+    @JsonProperty("host_id")
+    val hostId: Long,
+
     @Column("name")
     @JsonProperty("name")
     val name: String,
