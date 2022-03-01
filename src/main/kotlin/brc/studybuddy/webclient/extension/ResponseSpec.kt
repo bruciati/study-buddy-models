@@ -28,7 +28,8 @@ fun <T> WebClient.ResponseSpec.graphQlToMono(classType: Class<T>): Mono<T> =
     this.graphQlToMap()
         .handle { map, sink ->
             try {
-                sink.next(objectMapper.convertValue(map.values.first(), classType))
+                val value = map.values.first()
+                sink.next(objectMapper.convertValue(value, classType))
             } catch (_: IllegalArgumentException) {
                 sink.error(
                     GraphQlError(
@@ -61,12 +62,10 @@ fun <T> WebClient.ResponseSpec.graphQlToFlux(classType: Class<T>): Flux<T> =
             } catch (_: IllegalArgumentException) {
                 sink.error(
                     GraphQlError(
-                        "The result is not a Mono of type '${classType.name}'",
+                        "The result is not a Flux element of type '${classType.name}'",
                         GraphQlError.Location(0, 0)
                     )
                 )
-            } catch (_: NoSuchElementException) {
-                sink.complete()
             }
         }
 
