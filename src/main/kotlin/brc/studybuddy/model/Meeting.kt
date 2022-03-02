@@ -2,52 +2,35 @@ package brc.studybuddy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("meetings")
 data class Meeting(
     @Id
-    @JsonProperty("id")
-    val id: Long,
+    @JsonProperty(value = "id", defaultValue = "-1")
+    val id: Long = -1,
 
     @Column("group_id")
-    @JsonProperty("group_id")
-    val groupId: Long,
-
-    @Column("host_id")
-    @JsonProperty("host_id")
-    val hostId: Long,
+    @JsonProperty(value = "group_id", defaultValue = "-1")
+    val groupId: Long = -1,
 
     @Column("name")
-    @JsonProperty("name")
-    val name: String,
+    @JsonProperty(value = "name", defaultValue = "unknown")
+    val name: String = "unknown",
 
     @Column("datetime")
-    @JsonProperty("datetime")
-    val dateTime: Long,
+    @JsonProperty(value = "datetime", defaultValue = "0")
+    val dateTime: Long = 0,
 
     @Column("type")
-    @JsonProperty("type")
-    val type: Type,
+    @JsonProperty(value = "type", defaultValue = "PHYSICAL")
+    val type: Type = Type.PHYSICAL,
 
     @Column("location")
-    @JsonProperty("location")
-    val location: String
+    @JsonProperty(value = "location", defaultValue = "unknown")
+    val location: String = "unknown"
 ) {
-    @Transient
-    @JsonProperty("group")
-    var group: Group? = null
-
-    @Transient
-    @JsonProperty("host")
-    var host: User? = null
-
-    @Transient
-    @JsonProperty("attendees")
-    var attendees: List<User>? = null
-
     enum class Type {
         PHYSICAL,
         ONLINE

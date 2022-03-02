@@ -2,37 +2,28 @@ package brc.studybuddy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("users")
 data class User(
     @Id
-    @JsonProperty("id")
-    val id: Long,
+    @JsonProperty(value = "id", defaultValue = "-1")
+    val id: Long = -1,
 
     @Column("email")
-    @JsonProperty("email")
-    val email: String,
+    @JsonProperty(value = "email", defaultValue = "unknown@domain.tld")
+    val email: String = "unknown@domain.tld",
 
     @Column("login_type")
-    @JsonProperty("login_type")
-    val loginType: Type,
+    @JsonProperty(value = "login_type", defaultValue = "PASSWORD")
+    val loginType: LoginType = LoginType.PASSWORD,
 
     @Column("login_value")
-    @JsonProperty("login_value")
-    val loginValue: String,
-
-    @Column("groups")
-    @JsonProperty("groups_count")
-    val groupsCount: Long
+    @JsonProperty(value = "login_value", defaultValue = "password")
+    val loginValue: String = "password",
 ) {
-    @Transient
-    @JsonProperty("groups")
-    var groups: List<Group>? = null
-
-    enum class Type {
+    enum class LoginType {
         PASSWORD,
         FACEBOOK
     }

@@ -2,33 +2,20 @@ package brc.studybuddy.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
-import org.springframework.data.annotation.Transient
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 
 @Table("groups")
 data class Group(
     @Id
-    @JsonProperty("id")
-    val id: Long,
-
-    @Column("owner_id")
-    @JsonProperty("owner_id")
-    val ownerId: Long,
+    @JsonProperty(value = "id", defaultValue = "-1")
+    val id: Long = -1,
 
     @Column("title")
-    @JsonProperty("title")
-    val title: String,
+    @JsonProperty(value = "title", defaultValue = "unknown")
+    val title: String = "unknown",
 
     @Column("description")
-    @JsonProperty("description")
-    val description: String
-) {
-    @Transient
-    @JsonProperty("owner")
-    var owner: User? = null
-
-    @Transient
-    @JsonProperty("members")
-    var members: List<User>? = null
-}
+    @JsonProperty(value = "description", defaultValue = "unknown")
+    val description: String = "unknown"
+)
