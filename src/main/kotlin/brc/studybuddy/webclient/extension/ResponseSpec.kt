@@ -2,12 +2,14 @@ package brc.studybuddy.webclient.extension
 
 import brc.studybuddy.graphql.model.GraphQlError
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.web.reactive.function.client.WebClient
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 
 private val objectMapper = object : ThreadLocal<ObjectMapper>() {
-    override fun initialValue(): ObjectMapper = ObjectMapper()
+    override fun initialValue(): ObjectMapper = jacksonObjectMapper()
+
 
     @Throws(IllegalArgumentException::class)
     fun <T> convertValue(value: Any?, classType: Class<T>): T = get().convertValue(value, classType)
@@ -30,7 +32,8 @@ fun <T> WebClient.ResponseSpec.graphQlToMono(classType: Class<T>): Mono<T> =
             try {
                 val value = map.values.first()
                 sink.next(objectMapper.convertValue(value, classType))
-            } catch (_: IllegalArgumentException) {
+            } catch (e: IllegalArgumentException) {
+                e.printStackTrace()
                 sink.error(
                     GraphQlError(
                         "The result is not a Mono of type '${classType.name}'",
