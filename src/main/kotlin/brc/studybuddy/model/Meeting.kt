@@ -8,12 +8,12 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("meetings")
 data class Meeting(
     @Id
-    @JsonProperty(value = "id", defaultValue = "-1")
-    val id: Long = -1,
+    @JsonProperty(value = "id", defaultValue = "0")
+    val id: Long = 0,
 
     @Column("group_id")
     @JsonProperty(value = "group_id", defaultValue = "-1")
-    val groupId: Long = -1,
+    val groupId: Long = 0,
 
     @Column("name")
     @JsonProperty(value = "name", defaultValue = "unknown")

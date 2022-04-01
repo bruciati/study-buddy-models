@@ -8,8 +8,8 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("users")
 data class User(
     @Id
-    @JsonProperty(value = "id", defaultValue = "-1")
-    val id: Long = -1,
+    @JsonProperty(value = "id", defaultValue = "0")
+    val id: Long = 0,
 
     @Column("email")
     @JsonProperty(value = "email", defaultValue = "unknown@domain.tld")
