@@ -8,8 +8,8 @@ import org.springframework.data.relational.core.mapping.Table
 @Table("groups")
 data class Group(
     @Id
-    @JsonProperty(value = "id", defaultValue = "-1")
-    val id: Long = -1,
+    @JsonProperty(value = "id", defaultValue = "0")
+    val id: Long = 0,
 
     @Column("title")
     @JsonProperty(value = "title", defaultValue = "unknown")
