@@ -12,7 +12,7 @@
 
     <groupId>brc.studybuddy</groupId>
     <artifactId>study-buddy-models</artifactId>
-    <version>0.3.0</version>
+    <version>0.3.1</version>
     <packaging>jar</packaging>
 
     <name>StudyBuddy Models</name>
