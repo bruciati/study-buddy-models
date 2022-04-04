@@ -1,6 +1,6 @@
 package brc.studybuddy.webclient.extension
 
-import brc.studybuddy.graphql.model.GraphQlError
+import brc.studybuddy.graphql.model.GraphQlResponse
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.springframework.web.reactive.function.client.WebClient
@@ -10,65 +10,62 @@ import reactor.core.publisher.Mono
 private val objectMapper = object : ThreadLocal<ObjectMapper>() {
     override fun initialValue(): ObjectMapper = jacksonObjectMapper()
 
-    @Throws(IllegalArgumentException::class)
     fun <T> convertValue(value: Any?, classType: Class<T>): T = get().convertValue(value, classType)
 }
 
-private fun WebClient.ResponseSpec.graphQlToMap(): Mono<Map<*, *>> =
-    this.bodyToMono(Map::class.java)
-        .handle { map, sink ->
-            if (map.containsKey("errors")) {
-
-                val errors = map["errors"] as List<*>
-                val firstError = errors.first()
-                val firstErrorObj = objectMapper.convertValue(firstError, GraphQlError::class.java)
-                sink.error(firstErrorObj)
+private fun WebClient.ResponseSpec.graphQlToDataEntry(): Mono<Any> =
+    this.bodyToMono(GraphQlResponse::class.java)
+        .handle { r, s ->
+            if (r.errors != null && r.errors.isNotEmpty()) {
+                val error = r.errors.first()
+                s.error(error)
+            } else if (r.data != null) {
+                try {
+                    when (val value = r.data.values.first()) {
+                        null -> s.complete()
+                        else -> s.next(value)
+                    }
+                } catch (e: NoSuchElementException) {
+                    s.error(e)
+                }
             } else {
-                val dataMap = map["data"] as Map<*, *>
-                sink.next(dataMap)
+                s.complete()
             }
         }
 
 fun <T> WebClient.ResponseSpec.graphQlToMono(classType: Class<T>): Mono<T> =
-    this.graphQlToMap()
-        .handle { map, sink ->
+    this.graphQlToDataEntry()
+        .handle { v, s ->
             try {
-                val firstValue = map.values.first()
-                val firstValueObj = objectMapper.convertValue(firstValue, classType)
-                sink.next(firstValueObj)
+                val objectValue = objectMapper.convertValue(v, classType)
+                s.next(objectValue)
             } catch (_: IllegalArgumentException) {
-                sink.error(
-                    GraphQlError(
-                        "The result is not a Mono of type '${classType.name}'"
-                    )
+                s.error(
+                    Exception("The result is not a Mono of type '${classType.name}'")
                 )
-            } catch (_: NoSuchElementException) {
-                sink.complete()
             }
         }
 
 fun <T> WebClient.ResponseSpec.graphQlToFlux(classType: Class<T>): Flux<T> =
-    this.graphQlToMap()
-        .handle<List<*>> { map, sink ->
-            when (val value = map.values.first() as? List<*>) {
-                null -> sink.error(
-                    GraphQlError(
-                        "The result is not a Mono of type 'List<${classType.name}>'"
-                    )
+    this.graphQlToDataEntry()
+        .handle<List<*>> { v, s ->
+            try {
+                val listValue = v as List<*>
+                s.next(listValue)
+            } catch (_: ClassCastException) {
+                s.error(
+                    Exception("The result is not a Flux element of type '${classType.name}'")
                 )
-                else -> sink.next(value)
             }
         }
-        .flatMapIterable { it }
-        .handle { value, sink ->
+        .flatMapIterable { l -> l }
+        .handle { v, s ->
             try {
-                val valueObj = objectMapper.convertValue(value, classType)
-                sink.next(valueObj)
+                val objectValue = objectMapper.convertValue(v, classType)
+                s.next(objectValue)
             } catch (_: IllegalArgumentException) {
-                sink.error(
-                    GraphQlError(
-                        "The result is not a Flux element of type '${classType.name}'"
-                    )
+                s.error(
+                    Exception("The result is not a Flux element of type '${classType.name}'")
                 )
             }
         }
