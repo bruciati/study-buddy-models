@@ -9,8 +9,5 @@ data class GraphQlRequest(
     val query: String,
 
     @JsonProperty("variables")
-    val variables: HashMap<String, Any>?,
-
-    @JsonProperty("operationName")
-    val operationName: String? = null
+    val variables: Map<String, Any>?
 )
