@@ -2,7 +2,7 @@ package brc.studybuddy.graphql.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-data class GraphQlResponse(
+internal data class GraphQlResponse(
     @JsonProperty("errors")
     val errors: List<GraphQlError>?,
 
