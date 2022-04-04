@@ -22,7 +22,7 @@ data class User(
     @Column("login_value")
     @JsonProperty(value = "login_value", defaultValue = "password")
     val loginValue: String = "password",
-) {
+) : DataModel {
     enum class LoginType {
         PASSWORD,
         FACEBOOK

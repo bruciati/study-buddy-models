@@ -12,7 +12,7 @@ data class Meeting(
     val id: Long = 0,
 
     @Column("group_id")
-    @JsonProperty(value = "group_id", defaultValue = "-1")
+    @JsonProperty(value = "group_id", defaultValue = "0")
     val groupId: Long = 0,
 
     @Column("name")
@@ -30,7 +30,7 @@ data class Meeting(
     @Column("location")
     @JsonProperty(value = "location", defaultValue = "unknown")
     val location: String = "unknown"
-) {
+) : DataModel {
     enum class Type {
         PHYSICAL,
         ONLINE

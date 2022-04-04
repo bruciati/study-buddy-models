@@ -12,7 +12,7 @@
 
     <groupId>brc.studybuddy</groupId>
     <artifactId>study-buddy-models</artifactId>
-    <version>0.3.3</version>
+    <version>0.4.0</version>
     <packaging>jar</packaging>
 
     <name>StudyBuddy Models</name>
@@ -42,6 +42,20 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-r2dbc</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.data</groupId>
+                    <artifactId>spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.r2dbc</groupId>
+                    <artifactId>r2dbc-spi</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.r2dbc</groupId>
+                    <artifactId>r2dbc-pool</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- END/R2DBC -->
 

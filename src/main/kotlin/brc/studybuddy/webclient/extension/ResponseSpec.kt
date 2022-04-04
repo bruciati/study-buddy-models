@@ -14,10 +14,11 @@ private val objectMapper = object : ThreadLocal<ObjectMapper>() {
     fun <T> convertValue(value: Any?, classType: Class<T>): T = get().convertValue(value, classType)
 }
 
-fun WebClient.ResponseSpec.graphQlToMap(): Mono<Map<*, *>> =
+private fun WebClient.ResponseSpec.graphQlToMap(): Mono<Map<*, *>> =
     this.bodyToMono(Map::class.java)
         .handle { map, sink ->
             if (map.containsKey("errors")) {
+
                 val errors = map["errors"] as List<*>
                 val firstError = errors.first()
                 val firstErrorObj = objectMapper.convertValue(firstError, GraphQlError::class.java)
@@ -38,8 +39,7 @@ fun <T> WebClient.ResponseSpec.graphQlToMono(classType: Class<T>): Mono<T> =
             } catch (_: IllegalArgumentException) {
                 sink.error(
                     GraphQlError(
-                        "The result is not a Mono of type '${classType.name}'",
-                        GraphQlError.Location(0, 0)
+                        "The result is not a Mono of type '${classType.name}'"
                     )
                 )
             } catch (_: NoSuchElementException) {
@@ -53,8 +53,7 @@ fun <T> WebClient.ResponseSpec.graphQlToFlux(classType: Class<T>): Flux<T> =
             when (val value = map.values.first() as? List<*>) {
                 null -> sink.error(
                     GraphQlError(
-                        "The result is not a Mono of type 'List<${classType.name}>'",
-                        GraphQlError.Location(0, 0)
+                        "The result is not a Mono of type 'List<${classType.name}>'"
                     )
                 )
                 else -> sink.next(value)
@@ -68,8 +67,7 @@ fun <T> WebClient.ResponseSpec.graphQlToFlux(classType: Class<T>): Flux<T> =
             } catch (_: IllegalArgumentException) {
                 sink.error(
                     GraphQlError(
-                        "The result is not a Flux element of type '${classType.name}'",
-                        GraphQlError.Location(0, 0)
+                        "The result is not a Flux element of type '${classType.name}'"
                     )
                 )
             }
