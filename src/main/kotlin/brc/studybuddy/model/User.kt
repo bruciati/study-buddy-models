@@ -1,5 +1,7 @@
 package brc.studybuddy.model
 
+import brc.studybuddy.input.UserInput
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -15,15 +17,25 @@ data class User(
     @JsonProperty(value = "email", defaultValue = "unknown@domain.tld")
     val email: String = "unknown@domain.tld",
 
-    @Column("login_type")
-    @JsonProperty(value = "login_type", defaultValue = "PASSWORD")
-    val loginType: LoginType = LoginType.PASSWORD,
+    @Column("auth_type")
+    @JsonProperty(value = "auth_type", defaultValue = "PASSWORD")
+    @JsonAlias("authType")
+    val authType: AuthType = AuthType.PASSWORD,
 
-    @Column("login_value")
-    @JsonProperty(value = "login_value", defaultValue = "password")
-    val loginValue: String = "password",
-) : DataModel {
-    enum class LoginType {
+    @Column("auth_value")
+    @JsonProperty(value = "auth_value", defaultValue = "password")
+    @JsonAlias("authValue")
+    val authValue: String = "password"
+) : DataModel<User, UserInput>
+{
+    override fun toInput() = UserInput(
+        this.id,
+        this.email,
+        this.authType,
+        this.authValue
+    )
+
+    enum class AuthType {
         PASSWORD,
         FACEBOOK
     }

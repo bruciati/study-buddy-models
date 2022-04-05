@@ -1,5 +1,7 @@
 package brc.studybuddy.model
 
+import brc.studybuddy.input.MeetingInput
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -13,6 +15,7 @@ data class Meeting(
 
     @Column("group_id")
     @JsonProperty(value = "group_id", defaultValue = "0")
+    @JsonAlias("groupId", "groupID")
     val groupId: Long = 0,
 
     @Column("name")
@@ -21,16 +24,27 @@ data class Meeting(
 
     @Column("datetime")
     @JsonProperty(value = "datetime", defaultValue = "0")
+    @JsonAlias("dateTime", "date_time")
     val dateTime: Long = 0,
 
     @Column("type")
-    @JsonProperty(value = "type", defaultValue = "PHYSICAL")
-    val type: Type = Type.PHYSICAL,
+    @JsonProperty(value = "type", defaultValue = "ONLINE")
+    val type: Type = Type.ONLINE,
 
     @Column("location")
     @JsonProperty(value = "location", defaultValue = "unknown")
     val location: String = "unknown"
-) : DataModel {
+) : DataModel<Meeting, MeetingInput>
+{
+    override fun toInput() = MeetingInput(
+        this.id,
+        this.groupId,
+        this.name,
+        this.dateTime,
+        this.type,
+        this.location
+    )
+
     enum class Type {
         PHYSICAL,
         ONLINE
