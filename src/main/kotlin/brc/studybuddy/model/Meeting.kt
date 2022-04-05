@@ -37,7 +37,6 @@ data class Meeting(
 ) : DataModel<Meeting, MeetingInput>
 {
     override fun toInput() = MeetingInput(
-        this.id,
         this.groupId,
         this.name,
         this.dateTime,

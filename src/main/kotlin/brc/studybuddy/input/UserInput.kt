@@ -9,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class UserInput(
-    @JsonProperty(value = "id")
-    var id: Long? = null,
-
     @JsonProperty(value = "email")
     var email: String? = null,
 

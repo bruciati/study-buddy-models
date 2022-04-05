@@ -22,7 +22,6 @@ data class Group(
 ) : DataModel<Group, GroupInput>
 {
     override fun toInput() = GroupInput(
-        this.id,
         this.title,
         this.description
     )

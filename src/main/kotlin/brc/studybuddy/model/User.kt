@@ -29,7 +29,6 @@ data class User(
 ) : DataModel<User, UserInput>
 {
     override fun toInput() = UserInput(
-        this.id,
         this.email,
         this.authType,
         this.authValue
