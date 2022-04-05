@@ -16,6 +16,6 @@ data class Group(
     val title: String = "unknown",
 
     @Column("description")
-    @JsonProperty(value = "description")
+    @JsonProperty(value = "description", defaultValue = "null")
     val description: String? = null
 ) : DataModel
