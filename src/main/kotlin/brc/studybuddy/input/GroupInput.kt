@@ -9,13 +9,13 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class GroupInput(
     @JsonProperty(value = "id")
-    val id: Long? = null,
+    var id: Long? = null,
 
     @JsonProperty(value = "title")
-    val title: String? = null,
+    var title: String? = null,
 
     @JsonProperty(value = "description")
-    val description: String? = null
+    var description: String? = null
 ) : DataInput<Group, GroupInput>
 {
     override fun toModel() = Group(

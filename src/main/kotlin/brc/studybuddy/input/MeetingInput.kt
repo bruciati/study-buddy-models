@@ -10,24 +10,24 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class MeetingInput(
     @JsonProperty(value = "id", defaultValue = "0")
-    val id: Long? = null,
+    var id: Long? = null,
 
     @JsonProperty(value = "group_id")
     @JsonAlias("groupId", "groupID")
-    val groupId: Long? = null,
+    var groupId: Long? = null,
 
     @JsonProperty(value = "name")
-    val name: String? = null,
+    var name: String? = null,
 
     @JsonProperty(value = "datetime")
     @JsonAlias("dateTime", "date_time")
-    val dateTime: Long? = null,
+    var dateTime: Long? = null,
 
     @JsonProperty(value = "type")
-    val type: Meeting.Type? = null,
+    var type: Meeting.Type? = null,
 
     @JsonProperty(value = "location")
-    val location: String? = null
+    var location: String? = null
 ) : DataInput<Meeting, MeetingInput>
 {
     override fun toModel() = Meeting(

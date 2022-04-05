@@ -10,18 +10,18 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class UserInput(
     @JsonProperty(value = "id")
-    val id: Long? = null,
+    var id: Long? = null,
 
     @JsonProperty(value = "email")
-    val email: String? = null,
+    var email: String? = null,
 
     @JsonProperty(value = "auth_type")
     @JsonAlias("authType")
-    val authType: User.AuthType? = null,
+    var authType: User.AuthType? = null,
 
     @JsonProperty(value = "auth_value")
     @JsonAlias("authValue")
-    val authValue: String? = null
+    var authValue: String? = null
 ) : DataInput<User, UserInput>
 {
     override fun toModel() = User(
