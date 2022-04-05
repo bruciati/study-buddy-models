@@ -5,7 +5,7 @@ import org.springframework.web.reactive.function.client.WebClient
 import org.springframework.web.reactive.function.client.WebClient.RequestBodyUriSpec
 import reactor.core.publisher.Mono
 
-fun RequestBodyUriSpec.graphQlBody(
+private fun RequestBodyUriSpec.graphQlBody(
     query: String,
     variables: HashMap<String, Any>? = null
 ): WebClient.RequestHeadersSpec<*> =

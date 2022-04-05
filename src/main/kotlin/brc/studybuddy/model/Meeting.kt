@@ -1,5 +1,6 @@
 package brc.studybuddy.model
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -12,7 +13,8 @@ data class Meeting(
     val id: Long = 0,
 
     @Column("group_id")
-    @JsonProperty(value = "group_id", defaultValue = "-1")
+    @JsonProperty(value = "group_id", defaultValue = "0")
+    @JsonAlias("groupId", "groupID")
     val groupId: Long = 0,
 
     @Column("name")
@@ -21,6 +23,7 @@ data class Meeting(
 
     @Column("datetime")
     @JsonProperty(value = "datetime", defaultValue = "0")
+    @JsonAlias("dateTime", "date_time")
     val dateTime: Long = 0,
 
     @Column("type")
@@ -30,7 +33,7 @@ data class Meeting(
     @Column("location")
     @JsonProperty(value = "location", defaultValue = "unknown")
     val location: String = "unknown"
-) {
+) : DataModel {
     enum class Type {
         PHYSICAL,
         ONLINE

@@ -18,4 +18,4 @@ data class Group(
     @Column("description")
     @JsonProperty(value = "description")
     val description: String? = null
-)
+) : DataModel
