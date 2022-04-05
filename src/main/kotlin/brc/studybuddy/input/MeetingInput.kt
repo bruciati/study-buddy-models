@@ -9,9 +9,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class MeetingInput(
-    @JsonProperty(value = "id", defaultValue = "0")
-    var id: Long? = null,
-
     @JsonProperty(value = "group_id")
     @JsonAlias("groupId", "groupID")
     var groupId: Long? = null,

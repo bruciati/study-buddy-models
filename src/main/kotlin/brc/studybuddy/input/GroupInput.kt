@@ -8,9 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 data class GroupInput(
-    @JsonProperty(value = "id")
-    var id: Long? = null,
-
     @JsonProperty(value = "title")
     var title: String? = null,
 
@@ -19,9 +16,8 @@ data class GroupInput(
 ) : DataInput<Group, GroupInput>
 {
     override fun toModel() = Group(
-        this.id ?: 0,
-        this.title!!,
-        this.description
+        title = this.title!!,
+        description = this.description
     )
 
     override fun updateModel(model: Group) = Group(
