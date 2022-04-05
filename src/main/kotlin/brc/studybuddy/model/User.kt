@@ -1,5 +1,6 @@
 package brc.studybuddy.model
 
+import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -17,10 +18,12 @@ data class User(
 
     @Column("login_type")
     @JsonProperty(value = "login_type", defaultValue = "PASSWORD")
+    @JsonAlias("loginType")
     val loginType: LoginType = LoginType.PASSWORD,
 
     @Column("login_value")
     @JsonProperty(value = "login_value", defaultValue = "password")
+    @JsonAlias("loginValue")
     val loginValue: String = "password",
 ) : DataModel {
     enum class LoginType {
