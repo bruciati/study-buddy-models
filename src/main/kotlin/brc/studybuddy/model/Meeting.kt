@@ -27,8 +27,8 @@ data class Meeting(
     val dateTime: Long = 0,
 
     @Column("type")
-    @JsonProperty(value = "type", defaultValue = "PHYSICAL")
-    val type: Type = Type.PHYSICAL,
+    @JsonProperty(value = "type", defaultValue = "ONLINE")
+    val type: Type = Type.ONLINE,
 
     @Column("location")
     @JsonProperty(value = "location", defaultValue = "unknown")

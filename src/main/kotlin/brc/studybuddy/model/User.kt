@@ -16,17 +16,17 @@ data class User(
     @JsonProperty(value = "email", defaultValue = "unknown@domain.tld")
     val email: String = "unknown@domain.tld",
 
-    @Column("login_type")
-    @JsonProperty(value = "login_type", defaultValue = "PASSWORD")
-    @JsonAlias("loginType")
-    val loginType: LoginType = LoginType.PASSWORD,
+    @Column("auth_type")
+    @JsonProperty(value = "auth_type", defaultValue = "PASSWORD")
+    @JsonAlias("authType")
+    val authType: AuthType = AuthType.PASSWORD,
 
-    @Column("login_value")
-    @JsonProperty(value = "login_value", defaultValue = "password")
-    @JsonAlias("loginValue")
-    val loginValue: String = "password",
+    @Column("auth_value")
+    @JsonProperty(value = "auth_value", defaultValue = "password")
+    @JsonAlias("authValue")
+    val authValue: String = "password"
 ) : DataModel {
-    enum class LoginType {
+    enum class AuthType {
         PASSWORD,
         FACEBOOK
     }
