@@ -1,5 +1,6 @@
 package brc.studybuddy.model
 
+import brc.studybuddy.input.MeetingAttendeeInput
 import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.relational.core.mapping.Column
@@ -21,4 +22,11 @@ data class MeetingAttendee(
     @JsonProperty(value = "is_host", defaultValue = "false")
     @JsonAlias("isHost")
     val isHost: Boolean = false
-) : DataModel
+) : DataModel<MeetingAttendee, MeetingAttendeeInput>
+{
+    override fun toInput() = MeetingAttendeeInput(
+        this.meetingId,
+        this.userId,
+        this.isHost
+    )
+}

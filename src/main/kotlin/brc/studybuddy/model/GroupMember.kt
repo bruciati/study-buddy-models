@@ -1,5 +1,6 @@
 package brc.studybuddy.model
 
+import brc.studybuddy.input.GroupMemberInput
 import com.fasterxml.jackson.annotation.JsonAlias
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.relational.core.mapping.Column
@@ -21,4 +22,11 @@ data class GroupMember(
     @JsonProperty(value = "is_owner", defaultValue = "false")
     @JsonAlias("isOwner")
     val isOwner: Boolean = false
-) : DataModel
+) : DataModel<GroupMember, GroupMemberInput>
+{
+    override fun toInput() = GroupMemberInput(
+        this.groupId,
+        this.userId,
+        this.isOwner
+    )
+}
