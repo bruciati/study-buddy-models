@@ -11,15 +11,15 @@ import com.fasterxml.jackson.annotation.JsonProperty
 data class MeetingAttendeeInput(
     @JsonProperty(value = "meeting_id", defaultValue = "0")
     @JsonAlias("meetingId", "meetingID")
-    var meetingId: Long? = null,
+    val meetingId: Long? = null,
 
     @JsonProperty(value = "user_id", defaultValue = "0")
     @JsonAlias("userId", "userID")
-    var userId: Long? = null,
+    val userId: Long? = null,
 
     @JsonProperty(value = "is_host", defaultValue = "false")
     @JsonAlias("isHost")
-    var isHost: Boolean? = null
+    val isHost: Boolean? = null
 ) : DataInput<MeetingAttendee, MeetingAttendeeInput>
 {
     override fun toModel() = MeetingAttendee(

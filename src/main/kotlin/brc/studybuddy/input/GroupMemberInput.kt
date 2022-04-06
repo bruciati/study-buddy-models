@@ -8,15 +8,15 @@ import com.fasterxml.jackson.annotation.*
 data class GroupMemberInput(
     @JsonProperty(value = "group_id", defaultValue = "0")
     @JsonAlias("groupId", "groupID")
-    var groupId: Long? = null,
+    val groupId: Long? = null,
 
     @JsonProperty(value = "user_id", defaultValue = "0")
     @JsonAlias("userId", "userID")
-    var userId: Long? = null,
+    val userId: Long? = null,
 
     @JsonProperty(value = "is_owner", defaultValue = "false")
     @JsonAlias("isOwner")
-    var isOwner: Boolean? = null
+    val isOwner: Boolean? = null
 ) : DataInput<GroupMember, GroupMemberInput>
 {
     override fun toModel() = GroupMember(
