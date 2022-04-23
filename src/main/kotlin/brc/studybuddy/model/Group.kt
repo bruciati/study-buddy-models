@@ -1,5 +1,6 @@
 package brc.studybuddy.model
 
+import brc.studybuddy.input.GroupInput
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Column
@@ -18,4 +19,10 @@ data class Group(
     @Column("description")
     @JsonProperty(value = "description", defaultValue = "null")
     val description: String? = null
-) : DataModel
+) : DataModel<Group, GroupInput>
+{
+    override fun toInput() = GroupInput(
+        this.title,
+        this.description
+    )
+}
