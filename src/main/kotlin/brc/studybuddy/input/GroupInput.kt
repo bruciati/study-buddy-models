@@ -22,7 +22,7 @@ data class GroupInput(
 {
     override fun toModel() = Group(
         title = this.title!!,
-        areaOfInterest = this.areaOfInterest,
+        areaOfInterest = this.areaOfInterest ?: "Other",
         description = this.description
     )
 
