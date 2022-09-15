@@ -31,6 +31,8 @@ data class UserInput(
 {
     override fun toModel() = User(
         email = this.email!!,
+        firstName = this.firstName!!,
+        lastName = this.lastName,
         authType = this.authType!!,
         authValue = this.authValue!!
     )
@@ -38,6 +40,8 @@ data class UserInput(
     override fun updateModel(model: User) = User(
         model.id,
         this.email ?: model.email,
+        this.firstName ?: model.firstName,
+        this.lastName ?: model.lastName,
         this.authType ?: model.authType,
         this.authValue ?: model.authValue
     )
