@@ -12,6 +12,14 @@ data class UserInput(
     @JsonProperty(value = "email")
     val email: String? = null,
 
+    @JsonProperty(value = "firstname")
+    @JsonAlias("firstName", "first_name")
+    val firstName: String? = null,
+
+    @JsonProperty(value = "lastname")
+    @JsonAlias("lastName", "last_name")
+    val lastName: String? = null,
+
     @JsonProperty(value = "auth_type")
     @JsonAlias("authType")
     val authType: User.AuthType? = null,
