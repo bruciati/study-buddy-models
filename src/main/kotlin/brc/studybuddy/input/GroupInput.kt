@@ -29,7 +29,7 @@ data class GroupInput(
     override fun updateModel(model: Group) = Group(
         model.id,
         this.title ?: model.title,
-        this.areaOfInterest ?: model.areaOfInterest
+        this.areaOfInterest ?: model.areaOfInterest,
         this.description ?: model.description
     )
 }
