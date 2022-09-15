@@ -11,6 +11,10 @@ data class GroupInput(
     @JsonProperty(value = "title")
     val title: String? = null,
 
+    @JsonProperty(value = "area_of_interest")
+    @JsonAlias("areaOfInterest", "interest")
+    val areaOfInterest: String? = null,
+
     @JsonProperty(value = "description")
     val description: String? = null
 ) : DataInput<Group, GroupInput>

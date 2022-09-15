@@ -17,6 +17,14 @@ data class User(
     @JsonProperty(value = "email", defaultValue = "unknown@domain.tld")
     val email: String = "unknown@domain.tld",
 
+    @Column("firstname")
+    @JsonProperty(value = "firstname", defaultValue = "Unknown")
+    val firstName: String = "Unknown",
+
+    @Column("lastname")
+    @JsonProperty(value = "lastname", defaultValue = "null")
+    val lastName: String? = null,
+
     @Column("auth_type")
     @JsonProperty(value = "auth_type", defaultValue = "PASSWORD")
     @JsonAlias("authType")

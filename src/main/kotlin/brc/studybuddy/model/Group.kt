@@ -16,6 +16,10 @@ data class Group(
     @JsonProperty(value = "title", defaultValue = "unknown")
     val title: String = "unknown",
 
+    @Column("area_of_interest")
+    @JsonProperty(value = "area_of_interest", defaultValue = "Other")
+    val areaOfInterest: String = "Other",
+
     @Column("description")
     @JsonProperty(value = "description", defaultValue = "null")
     val description: String? = null
