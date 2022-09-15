@@ -27,6 +27,7 @@ data class Group(
 {
     override fun toInput() = GroupInput(
         this.title,
+        this.areaOfInterest
         this.description
     )
 }

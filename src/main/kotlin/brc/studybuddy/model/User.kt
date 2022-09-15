@@ -38,6 +38,8 @@ data class User(
 {
     override fun toInput() = UserInput(
         this.email,
+        this.firstName,
+        this.lastName,
         this.authType,
         this.authValue
     )
